@@ -1528,3 +1528,288 @@ I can go one level deeper and show you a complete Django app with:
 * API
 
 all in one coherent example.
+
+
+
+
+
+
+
+
+-------------------------------------------------
+
+Aquí tienes los comandos de Django más importantes, casi todos se ejecutan con:
+
+```bash
+python manage.py <comando>
+```
+
+## 1. Proyecto y apps
+
+### Crear un proyecto
+```bash
+django-admin startproject nombre_proyecto
+```
+
+### Crear una app
+```bash
+python manage.py startapp nombre_app
+```
+
+---
+
+## 2. Servidor de desarrollo
+
+### Iniciar servidor
+```bash
+python manage.py runserver
+```
+
+### Iniciar en otro puerto
+```bash
+python manage.py runserver 8001
+```
+
+### Escuchar en todas las interfaces
+```bash
+python manage.py runserver 0.0.0.0:8000
+```
+
+---
+
+## 3. Migraciones
+
+### Crear migraciones
+```bash
+python manage.py makemigrations
+```
+
+### Crear migraciones de una app específica
+```bash
+python manage.py makemigrations nombre_app
+```
+
+### Aplicar migraciones
+```bash
+python manage.py migrate
+```
+
+### Ver estado de migraciones
+```bash
+python manage.py showmigrations
+```
+
+### Ver SQL de una migración
+```bash
+python manage.py sqlmigrate nombre_app numero_migracion
+```
+
+Ejemplo:
+```bash
+python manage.py sqlmigrate accounts 0001
+```
+
+---
+
+## 4. Superusuario y usuarios
+
+### Crear superusuario
+```bash
+python manage.py createsuperuser
+```
+
+### Cambiar contraseña de un usuario
+```bash
+python manage.py changepassword username
+```
+
+---
+
+## 5. Shell de Django
+
+### Abrir shell
+```bash
+python manage.py shell
+```
+
+Sirve para probar modelos, consultas y lógica.
+
+Ejemplo:
+```python
+from accounts.models import CustomUser
+CustomUser.objects.all()
+```
+
+---
+
+## 6. Archivos estáticos
+
+### Recolectar archivos estáticos para producción
+```bash
+python manage.py collectstatic
+```
+
+---
+
+## 7. Base de datos e inspección
+
+### Vaciar la base de datos de una app con comandos SQL de reinicio
+```bash
+python manage.py flush
+```
+
+**Cuidado:** elimina datos.
+
+### Inspeccionar una base de datos existente y generar modelos
+```bash
+python manage.py inspectdb
+```
+
+---
+
+## 8. Pruebas
+
+### Ejecutar todos los tests
+```bash
+python manage.py test
+```
+
+### Ejecutar tests de una app
+```bash
+python manage.py test nombre_app
+```
+
+### Ejecutar una clase o test específico
+```bash
+python manage.py test nombre_app.tests.NombreTest
+```
+
+---
+
+## 9. Comandos útiles de sistema
+
+### Ver todos los comandos disponibles
+```bash
+python manage.py help
+```
+
+### Ver ayuda de un comando específico
+```bash
+python manage.py help runserver
+```
+
+### Comprobar problemas en el proyecto
+```bash
+python manage.py check
+```
+
+### Comprobar problemas de despliegue
+```bash
+python manage.py check --deploy
+```
+
+---
+
+## 10. Trabajar con fixtures
+
+### Exportar datos
+```bash
+python manage.py dumpdata
+```
+
+### Exportar una app
+```bash
+python manage.py dumpdata nombre_app
+```
+
+### Cargar datos
+```bash
+python manage.py loaddata archivo.json
+```
+
+---
+
+## 11. Comandos muy usados en el día a día
+
+Estos son los que más vas a usar normalmente:
+
+```bash
+python manage.py runserver
+python manage.py startapp nombre_app
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py shell
+python manage.py test
+python manage.py collectstatic
+python manage.py check
+```
+
+---
+
+## 12. Flujo típico de trabajo
+
+### Cuando creas o cambias modelos
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### Cuando quieres entrar al admin
+```bash
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+### Cuando quieres probar consultas
+```bash
+python manage.py shell
+```
+
+### Antes de desplegar
+```bash
+python manage.py check --deploy
+python manage.py collectstatic
+```
+
+---
+
+## 13. En tu proyecto también debes conocer estos externos
+Como en tu proyecto usas Celery, además de Django te conviene saber:
+
+### Levantar worker de Celery
+```bash
+celery -A ai_ticketing_assistant worker --loglevel=info
+```
+
+### Levantar Celery Beat
+```bash
+celery -A ai_ticketing_assistant beat --loglevel=info
+```
+
+### Si usas ASGI/Channels con Daphne o Uvicorn
+Ejemplo con Uvicorn:
+```bash
+uvicorn ai_ticketing_assistant.asgi:application --reload
+```
+
+---
+
+## Resumen mínimo que debes memorizar
+
+```bash
+python manage.py runserver
+python manage.py startapp nombre_app
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py shell
+python manage.py test
+python manage.py collectstatic
+python manage.py check
+```
+
+Si quieres, te puedo dar ahora una **chuleta en tabla** con:
+- comando
+- para qué sirve
+- cuándo usarlo.
